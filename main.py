@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="."), name="static")
 
 SYSTEM_PROMPT = """Сен — EduBot, Astana IT University колледжінің интеллектті оқу ассистентісің.
 Сен студенттерге мына модульдер бойынша көмек бересің:
@@ -61,7 +61,7 @@ class ChatRequest(BaseModel):
 
 @app.get("/")
 def root():
-    return FileResponse("static/index.html")
+    return FileResponse("index.html")
 
 @app.post("/chat")
 def chat(req: ChatRequest):

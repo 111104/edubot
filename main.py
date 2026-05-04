@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import List
 import anthropic
 import os
+import uvicorn
 
 app = FastAPI()
 
@@ -83,3 +84,8 @@ def chat(req: ChatRequest):
     )
 
     return {"response": response.content[0].text}
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
